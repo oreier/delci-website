@@ -1,0 +1,75 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --gold:        #FBB825;
+  --gold-soft:   #FBCF67;
+  --amber:       #ED8728;
+  --amber-dark:  #C86810;
+  --cream:       #FBE8C9;
+
+  /* Earthy brown — THE text colour for all scrolled sections */
+  --brown:       #3D1F08;
+  --brown-mid:   #6B3A18;
+
+  /* Section backgrounds — stepped warm progression */
+  --bg-music:    #F5E6CF;
+  --bg-tour:     #EDD8B8;
+  --bg-contact:  #E5CCA3;
+
+  /* Text */
+  --ink:         #1A0E00;
+  --ink-soft:    #4A3520;
+  --ink-ghost:   #8A6848;
+
+  /* Rules */
+  --rule:        rgba(61,31,8,0.10);
+  --rule-amber:  rgba(237,135,40,0.25);
+
+  --section-pad:    96px 64px;
+  --section-pad-sm: 64px 24px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg-music);
+  color: var(--brown);
+  overflow-x: hidden;
+}
+
+/* Global grain — one layer, subtle */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 9999;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.68' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  opacity: 0.032;
+  mix-blend-mode: overlay;
+}
+
+/* Scroll-triggered reveals */
+[data-animate] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+[data-animate].visible { opacity: 1; transform: none; }
+
+/* Section divider — animated warm gradient stripe */
+.section-divider {
+  height: 3px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--amber-dark) 20%,
+    var(--gold) 50%,
+    var(--amber-dark) 80%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 4s ease-in-out infinite;
+}
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

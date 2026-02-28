@@ -1,0 +1,134 @@
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Background photo ── */
+.bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.bgImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Keep the figure visible — upper third of the frame */
+  object-position: center 30%;
+  display: block;
+}
+
+/* Dark veil — heavier at top (nav legibility) and bottom, lighter in middle */
+.veil {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom,
+      rgba(10, 6, 2, 0.55) 0%,
+      rgba(10, 6, 2, 0.15) 35%,
+      rgba(10, 6, 2, 0.22) 55%,
+      rgba(10, 6, 2, 0.60) 100%
+    );
+}
+
+/* ── Centred content block ── */
+.content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  /* Push below the visual centre — 58vh from top */
+  margin-top: 16vh;
+  padding: 0 24px;
+  gap: 0;
+}
+
+/* "out now" — small mono label */
+.outNow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.9;
+  margin-bottom: 14px;
+  animation: fadeUp 0.9s ease 0.1s both;
+}
+
+/* "Ice Cream" — the hero statement */
+.songName {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 900;
+  /* ~40pt equivalent, scales with viewport */
+  font-size: clamp(2.8rem, 6.5vw, 5.5rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--cream);
+  margin-bottom: 28px;
+  animation: fadeUp 0.9s ease 0.25s both;
+  /* Warm gradient on the name */
+  background: linear-gradient(110deg, #FBE8C9 20%, #FBCF67 60%, #ED8728 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Listen Now button */
+.listenBtn {
+  display: inline-block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--cream);
+  border: none;
+  padding: 13px 40px;
+  text-decoration: none;
+  animation: fadeUp 0.9s ease 0.4s both;
+  transition: background 0.22s, color 0.22s, transform 0.18s;
+}
+.listenBtn:hover {
+  background: var(--gold);
+  color: var(--ink);
+  transform: translateY(-2px);
+}
+
+/* ── Scroll cue ── */
+.scrollCue {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  animation: fadeUp 1s ease 0.8s both;
+}
+.scrollLine {
+  width: 1px;
+  height: 46px;
+  background: linear-gradient(to bottom, rgba(251,232,201,0.55), transparent);
+  margin: 0 auto;
+  animation: pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse { 0%,100%{opacity:0.2} 50%{opacity:0.8} }
+
+/* Mobile */
+@media (max-width: 600px) {
+  .content { margin-top: 12vh; }
+  .songName { font-size: clamp(2.4rem, 14vw, 3.5rem); }
+}

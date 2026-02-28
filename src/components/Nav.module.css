@@ -1,0 +1,131 @@
+/* ─────────────────────────────────────────────────────────────
+   NAV — transparent on hero, DARK AMBER GLASS when scrolled
+   The scrolled state uses deep brown so text is ALWAYS visible
+   against any light section background.
+───────────────────────────────────────────────────────────── */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  /* ┌─ NAV HEIGHT ──────────────────────────────────────────┐
+     │ Adjust this number to make the bar taller/shorter     │
+     └───────────────────────────────────────────────────────┘ */
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  background: transparent;
+  transition: background 0.35s ease, border-bottom 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* ── SCROLLED STATE — deep amber-brown glass ── */
+/* This is INTENTIONALLY dark so it reads against cream/peach sections */
+.nav.scrolled {
+  background: rgba(30, 12, 2, 0.52);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  border-bottom: 1px solid rgba(251,184,37,0.12);
+}
+
+/* ── Brand ── */
+.left {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.flower {
+  /* ┌─ SUNFLOWER SIZE ───────────────────────────────────────┐
+     │ Keep ~0.75× the brandName font-size for visual match   │
+     └────────────────────────────────────────────────────────┘ */
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  animation: spin 28s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.brandName {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 700;
+  /* ┌─ BRAND NAME SIZE ──────────────────────────────────────┐
+     │ clamp(MOBILE-MIN, FLUID-VW, DESKTOP-MAX)               │
+     └────────────────────────────────────────────────────────┘ */
+  font-size: clamp(2.9rem, 4vw, 3.5rem);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  /* Cream on dark hero AND on dark scrolled nav */
+  color: var(--cream);
+  transition: color 0.25s;
+}
+.brand:hover .brandName { color: var(--gold); }
+
+/* Page links — cream on both states */
+.pageLinks {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dot {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  color: rgba(251,232,201,0.35);
+  user-select: none;
+}
+
+.pageLink {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  /* Cream on both transparent and dark-glass states */
+  color: rgba(251,232,201,0.60);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 4px;
+  transition: color 0.2s;
+}
+.pageLink:hover { color: var(--gold); }
+
+/* Social icons — cream on both states */
+.socials {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  color: rgba(251,232,201,0.50);
+  text-decoration: none;
+  transition: color 0.2s, transform 0.15s;
+}
+.icon:hover { color: var(--gold); transform: translateY(-1px); }
+
+/* Mobile */
+@media (max-width: 900px) {
+  .nav { padding: 0 20px; height: 56px; }
+  .icon:nth-child(n+6) { display: none; }
+  .pageLinks { gap: 4px; }
+  .pageLink { font-size: 0.72rem; }
+}
+@media (max-width: 600px) {
+  .icon:nth-child(n+4) { display: none; }
+  .flower { width: 38px; height: 38px; }
+  .brandName { font-size: 2.2rem; }
+}
