@@ -1,5 +1,5 @@
 import styles from './Hero.module.css'
-import runningBg from '../assets/running.jpeg'
+import runningBg from '../assets/running.png'
 
 export default function Hero() {
   return (
